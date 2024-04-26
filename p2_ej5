@@ -1,0 +1,9 @@
+-- Función factorial recursiva
+contarPares :: [Integer] -> Integer
+contarPares lista = sum[1|n<-lista, mod n 2 ==0]
+
+-- Ejemplo de uso:
+main :: IO ()
+main = do
+    let n = [1,2,3,4,5,6,7,8]
+    putStrLn $ "La lista " ++ show n ++ " tiene: " ++ show (contarPares n) ++ "pares"
