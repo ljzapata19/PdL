@@ -1,0 +1,10 @@
+-- Función factorial recursiva
+factorial :: Integer -> Integer
+factorial 0 = 1 -- El factorial de 0 es 1
+factorial n = n * factorial (n - 1) -- Definición recursiva del factorial
+
+-- Ejemplo de uso:
+main :: IO ()
+main = do
+    let n = 5
+    putStrLn $ "El factorial de " ++ show n ++ " es: " ++ show (factorial n)
