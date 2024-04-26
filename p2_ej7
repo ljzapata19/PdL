@@ -1,0 +1,9 @@
+--Definir una función que transforme una lista de números en otra lista que contenga 
+--el cubo de cada elemento
+cuboLista :: [Integer] -> [Integer]
+cuboLista lista = [x^3|x<-lista]
+main :: IO ()
+main = do
+    let n = [1,2,3,4,5,6,7,8]
+    putStrLn $ "Lista original" ++ show n ++ ", Lista al cubo: " ++ show (cuboLista n)
+
