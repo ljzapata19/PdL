@@ -1,0 +1,9 @@
+-- Definir una función que reciba una lista de listas y entregue la cantidad de elementos 
+--de la lista de mayor longitud.
+mayorTamanio :: [[Integer]] -> Int
+mayorTamanio lista = maximum[length x|x<-lista] 
+main :: IO ()
+main = do
+    let n = [[3,2],[1,2,3,4,5],[8,9]]
+    putStrLn $ "La sublista de mayor longitud de" ++ show n ++ " tiene: " ++ show (mayorTamanio n) ++ " elementos"
+
