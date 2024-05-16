@@ -1,0 +1,143 @@
+--  8
+-- Definir una función recursiva que permita eliminar los elementos repetidos de una 
+--lista de átomos.
+elimRepetidos ::(Integral a) =>  [a] -> [a]
+elimRepetidos [] = []
+elimRepetidos (x:xs) 
+    | elem x xs = elimRepetidos xs
+    | otherwise = x : elimRepetidos xs
+[2]
+
+--9
+--Implementar una función recursiva que pase un número decimal a binario
+decaBin :: (Integral a) => a -> [a]
+decaBin n
+    | n ==0 = [0]
+    | n== 1 = [1]
+    | otherwise = decaBin (div n 2) ++ [mod n 2]
+
+-- 10 
+--Implementar una función recursiva que permita obtener la 
+--unión de dos listas dadas; 
+--los elementos repetidos solo deben aparecer una vez
+
+
+--Otra forma primero definir elimRepetidos del ejercicio 8
+--unionSinRep :: (Integral a) => [a] -> [a] -> [a]
+--unionSinRep xs ys = elimRepetidos(xs ++ ys)
+
+
+unionSinRep :: (Integral a) => [a] -> [a] -> [a]
+unionSinRep [] ys = ys
+unionSinRep (x:xs) ys
+    | elem x ys = unionSinRep xs ys
+    | otherwise = x : unionSinRep xs ys
+
+-- 11
+cuentaAtomo :: [[Int]]-> Int
+cuentaAtomo [] = 0
+cuentaAtomo (x:xs) = length x + cuentaAtomo xs
+
+-- 12
+producto :: [[Int]]->[Int]->[Int]
+producto matriz vector = map(sum . zipWith (*) vector) matriz
+
+--14
+--Ejercicio Nº 14: Dada una lista ordenada y un átomo escribir 
+-- una función que inserte el átomo en el lugar correspondiente.
+-- 14
+insertaAtomo :: (Integral a ) => a -> [a] -> [a]
+insertaAtomo x [] = [x]
+insertaAtomo x (y:ys)
+    | elem x (y:ys) = (y:ys)
+    | x < y = (x:y:ys)
+    | otherwise =[y] ++ insertaAtomo x ys
+
+--15 
+listaUnNivel :: (Integral a) => [[a]] -> [a]
+listaUnNivel [] =[]
+listaUnNivel (x:xs) = x ++ listaUnNivel xs
+
+-- roci
+nivel1 :: Integral a => [[a]]->[a]
+nivel1 []= []
+nivel1 ([]:xs) = nivel1 xs
+nivel1 ((x: xs):ys) = x : nivel1 (xs:ys)
+
+--16
+sumaComplejos :: (Integral a) => [[a]] -> [a]
+sumaComplejos lista = [sum [head x| x <-lista] , sum [last y | y <- lista]]
+
+-- 17
+scanner :: (Integral a)=> a -> [a] -> [a]
+scanner n [] = [n]
+scanner n (x:xs) = x + head (scanner n xs) : scanner n xs
+
+-- 18
+--Escriba un programa que recibiendo como argumento una lista de listas donde 
+--cada sublista contiene nombre del docente, dedicación y carrera donde trabaja; entregue como 
+--resultado una lista con los nombres de los docentes que cobrarán un plus considerando que los 
+--cobrarán aquellos docentes que tenga solamente un cargo con dedicación simple. 
+
+plus :: [[String]] -> [String]
+plus lista = [ x | (x:xs) <- lista, head xs == "Simple" ]
+
+-- repaso 
+enlace :: (Integral a ) => [[a]] -> [[a]] -> [[a]]
+enlace lista1 lista2 = [(head x) : [ last y | y <- lista2, last x == head y] | x <- lista1]
+
+-- seguimiento parcial 1/6
+sigue[] = []
+sigue (x:xs) = (otra x xs) ++ sigue xs
+otra x [] = []
+otra x (p:xp) = [x,p] : (otra x xp)
+
+-- seguimiento recuperatorio 8/6
+arma :: (Integral a ) => [a] -> [[a]]
+arma []=[[]]
+arma (x:xs) = [ x:ys | ys <- lista] ++ lista
+    where lista = arma xs
+
+-- recuperatorio 8/6
+insertar :: (Integral a) => [a] -> [a] -> [a]
+insertar (x:xs) [] = x
+insertar [] ys = ys
+insertar (x:xs) (y:ys)
+    | elem x (y:ys) = insertar xs (y:ys)
+    | x < y = insertar xs ([x]++(y:ys))
+    | otherwise = y : insertar (x:xs) ys
+
+
+
+ins :: (Integral a) => a -> [a] -> [a]
+ins x [] = [x]
+ins x (y:ys)
+  | x <= y    = x : y : ys
+  | otherwise = y : ins x ys
+
+union :: (Integral a) => [a] -> [a] -> [a]
+union [] ys = ys
+union (x:xs) ys = union xs (ins x ys)
+
+
+
+unir :: (Integral a) => [a] -> [a] -> [a]
+unir [] ys =  ys
+-- unir (x:xs) [] = x
+unir (x:xs) (y:ys)
+    | x <= y = unir xs (x:y:ys)
+    | otherwise = y : unir (x:xs) ys
+
+
+-- prob
+
+insertar :: (Integral a) => [a] -> [a] -> [a]
+
+insertar [] ys = ys
+insertar (x:xs) [] = [x]
+
+insertar (x:xs) (y:ys)
+    | elem x (y:ys) = insertar xs (y:ys)
+    | x < y = insertar xs (x:y:ys)
+    | x > y  = y : insertar (x:xs) ys
+
